@@ -1,12 +1,24 @@
 package com.example.restapi.entidade;
 
+import static org.mockito.ArgumentMatchers.nullable;
+
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 
 @Entity
 public class Cidade {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCidade;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idEstado;
+    @Column(nullable = false)
     private String cidade;
+    @Column(nullable = false)
     
     public Long getIdCidade() {
         return idCidade;
