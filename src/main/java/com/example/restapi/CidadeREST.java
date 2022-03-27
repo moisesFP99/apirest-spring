@@ -8,6 +8,7 @@ import com.example.restapi.entidade.Cidade;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -36,8 +37,8 @@ public class CidadeREST {
         repositorioCidade.save(cidade);
     }
 
-    @DeleteMapping
-    public void excluir(@RequestBody Cidade cidade){
-        repositorioCidade.delete(cidade);
+    @DeleteMapping("/{idCidade}")
+    public void excluir(@PathVariable Long idCidade){
+        repositorioCidade.deleteById(idCidade);
     }
 }
