@@ -23,27 +23,44 @@ public class CidadeREST {
     @Autowired
     private RepositorioCidade repositorioCidade;
 
+    // GET pesquisa com paginação
     @GetMapping
     public Page<Cidade> listar(Pageable page){
         return repositorioCidade.findAll(page);
+    }   
+    
+    // GET número de registros
+    @GetMapping(value = {"/registros"})
+    private Long countRegistros(){
+        return repositorioCidade.count();
+    }   
+
+    // GET buscar por estado(uf)
+    @GetMapping(value = {"uf/{uf}"})
+    public List<Cidade> findByUF(@PathVariable String uf){
+         return repositorioCidade.findByUF(uf);        
     }
 
-    @GetMapping(path = {"/{uf}"})
-    public Page<Cidade> listarPorUF(Pageable uf){
-        return repositorioCidade.findAll(uf);
+    //GET buscar por nome
+    @GetMapping(value = {"cidade/{cidade}"})
+    public List<Cidade> findByNome(@PathVariable String cidade){
+         return repositorioCidade.findByNome(cidade);        
     }
 
+    // incluir
     @PostMapping
     public void salvar(@RequestBody Cidade cidade){
         repositorioCidade.save(cidade);
     }
 
+    // alterar
     @PutMapping
     public void alterar(@RequestBody Cidade cidade){
         if(cidade.getIdCidade() > 0)
         repositorioCidade.save(cidade);
     }
 
+    // deletar
     @DeleteMapping("/{idCidade}")
     public void excluir(@PathVariable Long idCidade){
         repositorioCidade.deleteById(idCidade);

@@ -23,22 +23,32 @@ public class EstadoREST {
     @Autowired
     private RepositorioEstado repositorioEstado;
 
+    // GET pesquisa com paginação
     @GetMapping
     public Page<Estado> listar(Pageable page){
         return repositorioEstado.findAll(page);
     }
 
+    //GET número de registros
+    @GetMapping(value = {"/registros"})
+    private Long countRegistros(){
+        return repositorioEstado.count();
+    }
+
+    // incluir
     @PostMapping
     public void salvar(@RequestBody Estado estado){
         repositorioEstado.save(estado);
     }
 
+    // alterar
     @PutMapping
     public void alterar(@RequestBody Estado estado){
         if(estado.getIdEstado() > 0)
         repositorioEstado.save(estado);
     }
 
+    // deletar
     @DeleteMapping("/{idEstado}")
     public void excluir(@PathVariable Long idEstado){
         repositorioEstado.deleteById(idEstado);
