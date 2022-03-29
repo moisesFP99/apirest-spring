@@ -12,7 +12,8 @@ public class Cidade {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCidade;  
     @Column(nullable = false)
-    private String cidade;    
+    private String cidade;      
+    private String uf;  
     
     public Long getIdCidade() {
         return idCidade;
@@ -26,6 +27,13 @@ public class Cidade {
     public void setCidade(String cidade) {
         this.cidade = cidade;
     }
+    public String getUf() {
+        return uf;
+    }
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+    
 
     
 }

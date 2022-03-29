@@ -6,6 +6,8 @@ import com.example.restapi.database.RepositorioEstado;
 import com.example.restapi.entidade.Estado;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,8 +24,8 @@ public class EstadoREST {
     private RepositorioEstado repositorioEstado;
 
     @GetMapping
-    public List<Estado> listar(){
-        return repositorioEstado.findAll();
+    public Page<Estado> listar(Pageable page){
+        return repositorioEstado.findAll(page);
     }
 
     @PostMapping
