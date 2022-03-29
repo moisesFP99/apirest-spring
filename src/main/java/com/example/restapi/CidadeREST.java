@@ -37,7 +37,7 @@ public class CidadeREST {
 
     // GET buscar por estado(uf)
     @GetMapping(value = {"uf/{uf}"})
-    public List<Cidade> findByUF(@PathVariable String uf){
+    public List<Cidade> findByUF(@PathVariable String uf, Pageable page){
          return repositorioCidade.findByUF(uf);        
     }
 
