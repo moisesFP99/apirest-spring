@@ -37,14 +37,17 @@ public class CidadeREST {
 
     // GET buscar por estado(uf)
     @GetMapping(value = {"uf/{uf}"})
-    public List<Cidade> findByUF(@PathVariable String uf, Pageable page){
-         return repositorioCidade.findByUF(uf);        
-    }
+    public Page<Cidade> findByUF(@PathVariable String uf, Pageable pageable){
+        return repositorioCidade.findByUf(uf, pageable);        
+}
 
-    //GET buscar por nome
-    @GetMapping(value = {"cidade/{cidade}"})
-    public List<Cidade> findByNome(@PathVariable String cidade){
-         return repositorioCidade.findByNome(cidade);        
+    //GET buscar por nome a partir de 3 caracteres
+    @GetMapping(value = {"cidade/{cidade}"})    
+    public Page<Cidade> findByCidade(@PathVariable String cidade, Pageable pageable){
+        if(cidade.length() > 3) {
+         return repositorioCidade.findByCidade(cidade, pageable);    
+        }
+        return null;    
     }
 
     // incluir
